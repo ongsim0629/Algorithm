@@ -9,3 +9,13 @@ function solution(age) {
         console.log("입력값을 확인해주세요.");
     }
 }
+
+/*
+다른 사람의 풀이 -> new Date().getFullYear()
+쓴 사람은 다 외워두고 있다가 쓰는건가? 아무튼 대단...
+
+function solution(age) {
+    return new Date().getFullYear() - age + 1;
+}
+
+*/
