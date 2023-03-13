@@ -12,6 +12,7 @@ function solution(num1, num2) {
 /* 
 다른 사람들 코드 -> 화살표 함수 쓰니까 엄청 간단하다.
 나도 쓰던 것만 쓰지 말고 새로운 것도 좀 써보쟈ㅑ
+
 const solution = (num1, num2) => num1 % num2
 
 */
