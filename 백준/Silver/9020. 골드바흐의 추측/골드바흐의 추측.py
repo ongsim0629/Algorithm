@@ -1,33 +1,32 @@
 T = int(input())
 
-def prime_numbers(n):
-    arr = [i for i in range(n+1)] # 인덱싱을 수월하게 하기 위해 0부터 배열 선언
-    end = int(n**(1/2))
-    for i in range(2, end+1):
-        if arr[i] == 0: # 이미 소수가 아님이 판별된 수는 건너뜀
-            continue
-        for j in range(i*i, n+1, i): # 자기 자신을 제외한 i의 배수는 모두 0으로 처리함.
-            arr[j] = 0
-            
-    return [i for i in arr[2:] if arr[i]]
-
-for i in range(T):
-    N = int(input())
+# 아리스토테네스의 체
+def find_prime(number):
+    prime_list = [i for i in range(number+1)]
     
-    #2부터 N까지의 수 나열
-    prime_list = prime_numbers(N)
+    for i in range(2, int(number**(1/2))+1):
+        if prime_list[i] == 0:
+            continue
+        for j in range(i*i, number+1, i):
+            prime_list[j] = 0
+    return [i for i in prime_list[2:] if prime_list[i]]
+    
+for i in range(T):
+    test_case = int(input())
+    # 0이 포함된 셋 -> 0 제거하고 리스트로 변환
+    prime_list = find_prime(test_case)
     prime_set = set(prime_list)
     
-    answer1 = 0
-    answer2 = 0
-    diff = 10000
+    diff = float('inf')
+    ans1 = 0
+    ans2 = 0
     
-    for prime in prime_list:
-        if N - prime in prime_set:  # N에서 현재 소수를 뺀 값이 소수 리스트에 있는지 확인
-            another_prime = N - prime
-            if diff > abs(prime - another_prime):
-                answer1 = prime
-                answer2 = another_prime
-                diff = abs(prime - another_prime)
-    
-    print(min(answer1, answer2), max(answer1, answer2))
+    for num in prime_set:
+        if (test_case - num) in prime_set:
+            num2 = test_case - num
+            if diff > abs(num2 - num):
+                diff = abs(num2 - num)
+                ans1 = num
+                ans2 = num2
+    print(min(ans1, ans2), max(ans1, ans2))
+        
