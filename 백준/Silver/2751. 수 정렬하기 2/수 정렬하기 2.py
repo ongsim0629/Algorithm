@@ -1,37 +1,46 @@
 import sys
-input=sys.stdin.readline
+input = sys.stdin.readline
 
 N = int(input())
 
-# 숫자 담을 리스트 만들기
-num_list = [None] * N
-
+num_list = [None]*N
 for i in range(N):
     num_list[i] = int(input())
 
-def merge_sort(arr):
-    if len(arr) < 2:
-        return arr
-
-    mid = len(arr) // 2
-    low_arr = merge_sort(arr[:mid])
-    high_arr = merge_sort(arr[mid:])
-
-    merged_arr = []
-    l = h = 0
-    while l < len(low_arr) and h < len(high_arr):
-        if low_arr[l] < high_arr[h]:
-            merged_arr.append(low_arr[l])
-            l += 1
+def merge(arr1, arr2):
+    answer_list = []
+    i, j = 0, 0
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] <= arr2[j]:
+            answer_list.append(arr1[i])
+            i += 1
         else:
-            merged_arr.append(high_arr[h])
-            h += 1
-    merged_arr += low_arr[l:]
-    merged_arr += high_arr[h:]
-    return merged_arr
+            answer_list.append(arr2[j])
+            j += 1
     
+    # 남은 요소들을 추가합니다.
+    while i < len(arr1):
+        answer_list.append(arr1[i])
+        i += 1
+    
+    while j < len(arr2):
+        answer_list.append(arr2[j])
+        j += 1
 
-sorted = merge_sort(num_list)
+    return answer_list
 
-for i in range(N):
-    print(sorted[i])
+    
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        mid = len(arr) // 2
+        left_arr = merge_sort(arr[:mid])
+        right_arr = merge_sort(arr[mid:])
+        return merge(left_arr, right_arr)
+        
+sorted_list = merge_sort(num_list)
+
+# 결과 출력
+for num in sorted_list:
+    print(num)
