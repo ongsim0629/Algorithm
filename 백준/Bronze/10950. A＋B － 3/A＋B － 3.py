@@ -1,9 +1,5 @@
-T = int(input())
-list = []
+N = int(input())
 
-for i in range(T):
-    A,B = [int(x) for x in input().split()]
-    list.append(A+B)
-
-for item in list:
-    print(item)
+for i in range(N):
+    A, B = map(int, input().split(" "))
+    print(A+B)
