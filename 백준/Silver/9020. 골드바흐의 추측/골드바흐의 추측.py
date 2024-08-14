@@ -9,24 +9,26 @@ def find_prime(number):
             continue
         for j in range(i*i, number+1, i):
             prime_list[j] = 0
-    return [i for i in prime_list[2:] if prime_list[i]]
+    return set(prime_list)
     
 for i in range(T):
     test_case = int(input())
     # 0이 포함된 셋 -> 0 제거하고 리스트로 변환
     prime_list = find_prime(test_case)
-    prime_set = set(prime_list)
+    prime_list.remove(0)
+    prime_list.remove(1)
     
     diff = float('inf')
     ans1 = 0
     ans2 = 0
     
-    for num in prime_set:
-        if (test_case - num) in prime_set:
-            num2 = test_case - num
-            if diff > abs(num2 - num):
-                diff = abs(num2 - num)
-                ans1 = num
+    for num in prime_list:
+        num1 = num
+        if (test_case - num1) in prime_list:
+            num2 = test_case - num1
+            if diff > abs(num2 - num1):
+                diff = abs(num2 - num1)
+                ans1 = num1
                 ans2 = num2
     print(min(ans1, ans2), max(ans1, ans2))
         
