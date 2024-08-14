@@ -1,18 +1,18 @@
-def is_prime(x):
-    if (x == 1):
+N = int(input())
+
+num_list = list(map(int, input().split(" ")))
+
+def is_prime(number):
+    if number == 1:
         return False
-    for i in range(2,x//2+1):
-        if (x % i == 0):
+    
+    for i in range(2, number):
+        if number % i == 0:
             return False
     return True
 
-N = int(input())
-num_list = [int(x) for x in input().split(" ")]
 count = 0
-
-for num in num_list:
-    answer = is_prime(num)
-    if answer == True:
+for number in num_list:
+    if is_prime(number):
         count += 1
-    
 print(count)
