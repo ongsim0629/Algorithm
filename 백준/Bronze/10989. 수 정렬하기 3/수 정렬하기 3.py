@@ -1,17 +1,15 @@
 import sys
+input = sys.stdin.readline
 
-def input():
-    return sys.stdin.readline()
+N = int(input())
 
-n = int(input())
+num_list = [0]*10001
 
-count = [0] * 10001
-
-for _ in range(n):
+for _ in range(N):
     num = int(input())
-    count[num] += 1
+    num_list[num] += 1
 
 for i in range(1, 10001):
-    if count[i] != 0:
-        for _ in range(count[i]):
+    if num_list[i]:
+        for j in range(num_list[i]):
             print(i)
