@@ -6,28 +6,27 @@ weights = list(map(int, input().split()))
 num_of_bead = int(input())
 beads = list(map(int, input().split()))
 
-# 가능한 무게는 양수와 음수를 포함하므로, 최대치를 고려해서 넓게 dp 테이블을 잡음
+# 추의 최대 무게 합을 구해 DP 테이블 크기 설정
 max_weight = sum(weights)
-dp = [False] * (max_weight * 2 + 1)  # 음수를 처리하기 위해 두 배 크기의 dp 테이블
+dp = [[False] * (max_weight + 1) for _ in range(num_of_weight + 1)]
 
-# dp 테이블에서 중앙을 기준으로 0g을 표현할 수 있게끔 오프셋을 설정
-offset = max_weight
-
-dp[offset] = True  # 0그램은 항상 만들 수 있음
+# 0그램은 항상 만들 수 있음
+dp[0][0] = True
 
 # DP 테이블 갱신
-for weight in weights:
-    temp_dp = dp[:]  # 기존 dp를 복사해 중복 갱신을 막기 위한 임시 배열 사용
-    for i in range(len(dp)):
-        if dp[i]:  # 현재 무게 i를 만들 수 있다면
-            temp_dp[i + weight] = True  # 현재 무게에 추가하여 만들 수 있는 경우
-            temp_dp[i - weight] = True  # 현재 무게에서 빼서 만들 수 있는 경우
-    dp = temp_dp  # dp 배열 업데이트
+for i in range(1, num_of_weight + 1):
+    weight = weights[i - 1]
+    for j in range(max_weight + 1):
+        if dp[i - 1][j]:  # 이전 단계에서 무게 j를 만들 수 있었다면
+            dp[i][j] = True  # 현재도 만들 수 있음
+            if j + weight <= max_weight:
+                dp[i][j + weight] = True  # 현재 추를 더해서 만들 수 있는 무게
+            if abs(j - weight) <= max_weight:
+                dp[i][abs(j - weight)] = True  # 현재 추를 빼서 만들 수 있는 무게
 
-# 구슬 무게 판별
+# 결과 확인
 for bead in beads:
-    if bead + offset < len(dp) and dp[bead + offset]:
+    if bead <= max_weight and dp[num_of_weight][bead]:
         print("Y", end=" ")
     else:
         print("N", end=" ")
-
