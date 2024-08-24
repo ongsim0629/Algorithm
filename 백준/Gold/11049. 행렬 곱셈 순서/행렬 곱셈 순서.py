@@ -1,22 +1,17 @@
 import sys
 input = sys.stdin.readline
 
-# 행렬의 개수 입력
-N = int(input())
-size_list = [tuple(map(int, input().split())) for _ in range(N)]
+n = int(input())
 
-# dp 테이블 초기화 (최대 연산 횟수 초기화)
-dp = [[0] * N for _ in range(N)]
+arr = [list(map(int, input().split())) for _ in range(n)]
+arr = [a for a, _ in arr] + [arr[-1][1]]
+dp = [[0] * n for _ in range(n)]
 
-# 비용 저장 테이블 초기화 (행렬 곱셈의 최소 연산 횟수 저장)
-for length in range(1, N):  # 부분 행렬의 길이
-    for i in range(N - length):
-        j = i + length
-        dp[i][j] = float('inf')
-        for k in range(i, j):
-            # dp[i][k] + dp[k+1][j] + 행렬 곱셈 비용
-            cost = dp[i][k] + dp[k+1][j] + size_list[i][0] * size_list[k+1][0] * size_list[j][1]
-            dp[i][j] = min(dp[i][j], cost)
+for step in range(1,n):
+    for loc in range(n-step):
+        end = loc + step
+        mul = arr[loc] * arr[end+1]
+        minimum =  min(yk + xk + sz * mul for yk, xk, sz in zip(dp[loc][loc:end], dp[end][loc+1:end+1], arr[loc+1:end+1]))
+        dp[loc][end] = dp[end][loc] = minimum
 
-# 결과 출력
-print(dp[0][N-1])
+print(dp[0][-1])
