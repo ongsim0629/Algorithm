@@ -32,7 +32,9 @@ for i in range(N):
     else:
         for j in range(i):
             if is_palindrome[j+1][i]:  # j+1부터 i까지가 팰린드롬이면
-                dp[i] = min(dp[i], dp[j] + 1)  # j까지의 최소 분할 수에 1을 더한 값과 비교
+                # j까지의 최소 분할 수에 1을 더한 값과 비교 왜냐하면 j까지 + 팰린드롬 1개 이므로
+                # 그거랑 여태까지 i의 최소 분할 수 비교해서 더 작은 것으로 갑니당
+                dp[i] = min(dp[i], dp[j] + 1) 
 
 # 결과 출력 (마지막 인덱스의 dp 값이 최소 분할 수)
 print(dp[N-1])
