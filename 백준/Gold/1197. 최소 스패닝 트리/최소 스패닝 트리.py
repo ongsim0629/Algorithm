@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10000) 
 
 # 부모 노드를 찾아주는 함수
 def find(parent_info_arr, x):
