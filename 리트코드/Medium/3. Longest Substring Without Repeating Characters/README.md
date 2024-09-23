@@ -47,6 +47,11 @@ Explanation: The answer is "wke", with the length of 3.
 Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 ```
 
+### 풀이 과정
+N의 범위가 50,000으로 시간 복잡도 O(N^2) 이하의 알고리즘이 사용 가능하다는 점을 인식. <br>
+
+두 개의 for 문을 사용하여 (시간 복잡도 O(N^2)이 가능하기 때문에) 문자열의 시작 위치와 다음 부분 문자열의 시작 위치를 순회하며, 부분 문자열을 생성하고, 생성된 각 부분 문자열의 길이를 비교한 뒤, 최대 부분 문자열의 길이를 반환한다.
+
 ### 개선 방법
 시간 복잡도 개선 => 해시 테이블과 슬라이딩 윈도우 방식.
 
