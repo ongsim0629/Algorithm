@@ -1,4 +1,4 @@
-# [Easy] Longest Substring Without Repeating Characters - 3
+# [Easy] Two Sum - 1
 
 [문제 링크](https://leetcode.com/problems/two-sum/)
 
