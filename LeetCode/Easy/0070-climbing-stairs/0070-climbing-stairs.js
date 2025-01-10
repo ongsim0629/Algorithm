@@ -1,7 +1,3 @@
-/**
- * @param {number} n
- * @return {number}
- */
 var climbStairs = function(n) {
     dp = [];
     dp[0]=0;
