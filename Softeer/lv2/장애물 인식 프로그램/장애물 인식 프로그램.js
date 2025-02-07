@@ -19,7 +19,6 @@ function dfs(x,y){
         const new_x = x+dx[i];
         const new_y = y+dy[i];
         if(new_x >= 0 && new_x < N && new_y >= 0 && new_y < N && map[new_x][new_y] === 1 && visited[new_x][new_y] === false){
-            visited[new_x][new_y] = true;
             obstacle += dfs(new_x,new_y);
         }
     }
@@ -35,6 +34,7 @@ for (let i = 0; i < N; i++){
 }
 
 console.log(answer.length);
-for (ans of answer){
+const sorted_answer = answer.sort((a,b) => a-b);
+for (ans of sorted_answer){
     console.log(ans);
 }
